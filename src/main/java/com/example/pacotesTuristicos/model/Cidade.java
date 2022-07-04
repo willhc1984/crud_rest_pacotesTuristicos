@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_cidade")
 public class Cidade implements Serializable{
@@ -26,6 +28,7 @@ public class Cidade implements Serializable{
 	private String estado;
 	private String website;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cidade")
 	private List<Hotel> hoteis = new ArrayList<>();
 	@Transient
