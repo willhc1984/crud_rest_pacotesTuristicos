@@ -13,7 +13,7 @@ public class Restaurante implements Serializable{
 	private Double valorRefeicao;
 	
 	private Cidade cidade;
-	private List<PacoteTuristico> pacotes = new ArrayList<>();
+	private List<Pacote> pacotes = new ArrayList<>();
 	
 	public Restaurante() {
 	}
@@ -58,11 +58,11 @@ public class Restaurante implements Serializable{
 		this.cidade = cidade;
 	}
 	
-	public List<PacoteTuristico> getPacotes() {
+	public List<Pacote> getPacotes() {
 		return pacotes;
 	}
 	
-	public void addPacotes(PacoteTuristico pacote) {
+	public void addPacotes(Pacote pacote) {
 		pacotes.add(pacote);
 	}
 
@@ -96,7 +96,7 @@ public class Restaurante implements Serializable{
 		sb.append(cidade.getNome() + "\n");
 		sb.append("Data de viagem: ");
 		sb.append("\n");
-		for(PacoteTuristico p : pacotes) {
+		for(Pacote p : pacotes) {
 			sb.append(p.getDataViagem());
 		}
 		

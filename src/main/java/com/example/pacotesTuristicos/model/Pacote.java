@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class PacoteTuristico implements Serializable{
+public class Pacote implements Serializable{
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	
@@ -19,10 +19,10 @@ public class PacoteTuristico implements Serializable{
 	private Restaurante restaurante;
 	private Hotel hotel;
 	
-	public PacoteTuristico() {
+	public Pacote() {
 	}
 
-	public PacoteTuristico(Integer id, Date dataViagem, Integer diasPermanencia, Integer refeicoesPorDia, Cidade cidade, Restaurante restaurante, Hotel hotel) {
+	public Pacote(Integer id, Date dataViagem, Integer diasPermanencia, Integer refeicoesPorDia, Cidade cidade, Restaurante restaurante, Hotel hotel) {
 		super();
 		this.id = id;
 		this.dataViagem = dataViagem;
@@ -102,7 +102,7 @@ public class PacoteTuristico implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PacoteTuristico other = (PacoteTuristico) obj;
+		Pacote other = (Pacote) obj;
 		return Objects.equals(id, other.id);
 	}
 
