@@ -5,18 +5,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Pacote implements Serializable{
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	
 	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private Integer id;
 	private Date dataViagem;
 	private Integer diasPermanencia;
 	private Integer refeicoesPorDia;
 	
+	@Transient
 	private Cidade cidade;
+	@Transient
 	private Restaurante restaurante;
+	@Transient
 	private Hotel hotel;
 	
 	public Pacote() {
