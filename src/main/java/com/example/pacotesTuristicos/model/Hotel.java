@@ -26,7 +26,7 @@ public class Hotel implements Serializable{
 	private String nome;
 	private Double valorDiaria;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Cidade cidade;
 	@Transient
 	private List<Pacote> pacotes = new ArrayList<>();
