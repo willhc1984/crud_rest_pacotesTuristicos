@@ -25,5 +25,9 @@ public class HotelService {
 		Optional<Hotel> hotel = repository.findById(id);
 		return hotel.get();
 	}
+	
+	public Hotel salvar(Hotel hotel) {
+		return repository.save(hotel);
+	}
 
 }

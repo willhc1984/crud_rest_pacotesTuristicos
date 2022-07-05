@@ -45,6 +45,4 @@ public class CidadeService {
 		obj.setWebsite(cidade.getWebsite());
 	}
 	
-	
-
 }
