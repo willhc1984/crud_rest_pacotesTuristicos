@@ -33,6 +33,18 @@ public class CidadeService {
 		repository.deleteById(id);
 	}
 	
+	public Cidade atualizar(Integer id, Cidade cidade) {
+		Cidade obj = repository.getOne(id);
+		updateData(obj, cidade);
+		return repository.save(obj);
+	}
+
+	private void updateData(Cidade obj, Cidade cidade) {
+		obj.setNome(cidade.getNome());
+		obj.setEstado(cidade.getEstado());
+		obj.setWebsite(cidade.getWebsite());
+	}
+	
 	
 
 }
