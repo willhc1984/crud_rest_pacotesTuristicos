@@ -28,5 +28,11 @@ public class CidadeService {
 	public Cidade salvar(Cidade cidade) {
 		return repository.save(cidade);
 	}
+	
+	public void apagar(Integer id) {
+		repository.deleteById(id);
+	}
+	
+	
 
 }
