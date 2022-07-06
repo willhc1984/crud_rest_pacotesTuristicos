@@ -30,7 +30,7 @@ public class Cidade implements Serializable{
 	
 	@OneToMany(mappedBy = "cidade")
 	private List<Hotel> hoteis = new ArrayList<>();
-	@Transient
+	@OneToMany(mappedBy = "cidade")
 	private List<Restaurante> restaurantes = new ArrayList<>();
 	@Transient
 	private List<Pacote> pacotes = new ArrayList<>();

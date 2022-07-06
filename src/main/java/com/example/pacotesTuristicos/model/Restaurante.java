@@ -5,20 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
+@Table(name = "tb_restaurante")
 public class Restaurante implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private Double valorRefeicao;
-	@Transient
+	
+	@ManyToOne
 	private Cidade cidade;
 	@Transient
 	private List<Pacote> pacotes = new ArrayList<>();
