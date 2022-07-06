@@ -48,7 +48,7 @@ public class CidadeResource {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
+	public ResponseEntity<Void> apagar(@PathVariable Integer id){
 		service.apagar(id);
 		return ResponseEntity.noContent().build();
 	}

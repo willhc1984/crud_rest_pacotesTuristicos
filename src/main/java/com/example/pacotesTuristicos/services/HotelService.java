@@ -29,5 +29,9 @@ public class HotelService {
 	public Hotel salvar(Hotel hotel) {
 		return repository.save(hotel);
 	}
+	
+	public void apagar(Integer id) {
+		repository.deleteById(id);
+	}
 
 }

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_hotel")
 public class Hotel implements Serializable{
@@ -26,7 +28,8 @@ public class Hotel implements Serializable{
 	private String nome;
 	private Double valorDiaria;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	@ManyToOne
 	private Cidade cidade;
 	@Transient
 	private List<Pacote> pacotes = new ArrayList<>();
