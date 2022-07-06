@@ -31,7 +31,7 @@ public class RestauranteResource {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Restaurante buscarPorId(Integer id) {
+	public Restaurante buscarPorId(@PathVariable Integer id) {
 		Restaurante restaurante = service.buscarPorId(id);
 		return restaurante;
 	}

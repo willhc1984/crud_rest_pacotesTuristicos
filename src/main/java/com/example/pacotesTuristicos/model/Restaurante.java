@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_restaurante")
 public class Restaurante implements Serializable{
@@ -26,6 +28,7 @@ public class Restaurante implements Serializable{
 	private String nome;
 	private Double valorRefeicao;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Cidade cidade;
 	@Transient
