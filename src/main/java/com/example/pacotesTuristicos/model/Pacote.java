@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_pacote")
 public class Pacote implements Serializable{
@@ -29,11 +31,12 @@ public class Pacote implements Serializable{
 	private Integer diasPermanencia;
 	private Integer refeicoesPorDia;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Cidade cidade;
 	@Transient
 	private Restaurante restaurante;
-	@Transient
+	@ManyToOne
 	private Hotel hotel;
 	
 	public Pacote() {
