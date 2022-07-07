@@ -29,9 +29,10 @@ public class Hotel implements Serializable{
 	private String nome;
 	private Double valorDiaria;
 	
-	@JsonIgnore
 	@ManyToOne
 	private Cidade cidade;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "hotel")
 	private List<Pacote> pacotes = new ArrayList<>();
 	

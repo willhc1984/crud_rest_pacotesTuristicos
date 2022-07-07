@@ -31,12 +31,12 @@ public class Pacote implements Serializable{
 	private Integer diasPermanencia;
 	private Integer refeicoesPorDia;
 	
-	@JsonIgnore
 	@ManyToOne
 	private Cidade cidade;
-	@Transient
+	
+	@ManyToOne
 	private Restaurante restaurante;
-	@JsonIgnore
+	
 	@ManyToOne
 	private Hotel hotel;
 	

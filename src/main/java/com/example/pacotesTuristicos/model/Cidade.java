@@ -28,10 +28,15 @@ public class Cidade implements Serializable{
 	private String estado;
 	private String website;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cidade")
 	private List<Hotel> hoteis = new ArrayList<>();
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cidade")
 	private List<Restaurante> restaurantes = new ArrayList<>();
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cidade")
 	private List<Pacote> pacotes = new ArrayList<>();
 	
