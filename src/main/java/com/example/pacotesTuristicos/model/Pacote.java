@@ -36,6 +36,7 @@ public class Pacote implements Serializable{
 	private Cidade cidade;
 	@Transient
 	private Restaurante restaurante;
+	@JsonIgnore
 	@ManyToOne
 	private Hotel hotel;
 	
