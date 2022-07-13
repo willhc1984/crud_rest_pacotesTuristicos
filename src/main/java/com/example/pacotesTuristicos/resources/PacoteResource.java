@@ -1,6 +1,5 @@
 package com.example.pacotesTuristicos.resources;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,36 +12,31 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.pacotesTuristicos.model.Hotel;
-import com.example.pacotesTuristicos.services.HotelService;
+import com.example.pacotesTuristicos.model.Pacote;
+import com.example.pacotesTuristicos.services.PacoteService;
 
 @RestController
-@RequestMapping(value = "/hoteis")
-public class HotelResource {
+@RequestMapping(value = "/pacotes")
+public class PacoteResource {
 	
 	@Autowired
-	private HotelService service;
+	private PacoteService service;
 	
 	@GetMapping
-	public List<Hotel> buscarTodos(){
-		List<Hotel> hoteis = service.buscarTodos();
-		return hoteis;
+	public List<Pacote> buscarTodos(){
+		return service.buscarTodos();
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Hotel buscarPorId(@PathVariable Integer id) {
-		Hotel hotel = service.buscarPorId(id);
-		return hotel;
+	public Pacote buscarPorId(@PathVariable Integer id) {
+		return service.buscarPorId(id);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Hotel> salvar(@RequestBody Hotel hotel){
-		service.salvar(hotel);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(hotel.getId()).toUri();
-		return ResponseEntity.created(uri).body(hotel);
+	public ResponseEntity<Pacote> salvar(@RequestBody Pacote pacote){
+		service.salvar(pacote);
+		return ResponseEntity.ok().body(pacote);
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -52,10 +46,8 @@ public class HotelResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Hotel> atualizar(@PathVariable Integer id, @RequestBody Hotel hotel){
-		hotel = service.atualizar(id, hotel);
-		return ResponseEntity.ok().body(hotel);
+	public ResponseEntity<Pacote> atualizar(@PathVariable Integer id, @RequestBody Pacote pacote){
+		pacote = service.atualizar(id, pacote);
+		return ResponseEntity.ok().body(pacote);
 	}
-	
-	
 }

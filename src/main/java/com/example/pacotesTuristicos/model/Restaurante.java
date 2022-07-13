@@ -6,21 +6,32 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_restaurante")
 public class Restaurante implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private Double valorRefeicao;
-	@Transient
+	
+	@ManyToOne
 	private Cidade cidade;
-	@Transient
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "restaurante")
 	private List<Pacote> pacotes = new ArrayList<>();
 	
 	public Restaurante() {

@@ -5,11 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
+@Table(name = "tb_pacote")
 public class Pacote implements Serializable{
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -17,16 +25,19 @@ public class Pacote implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Date dataViagem;
 	private Integer diasPermanencia;
 	private Integer refeicoesPorDia;
 	
-	@Transient
+	@ManyToOne
 	private Cidade cidade;
-	@Transient
+	
+	@ManyToOne
 	private Restaurante restaurante;
-	@Transient
+	
+	@ManyToOne
 	private Hotel hotel;
 	
 	public Pacote() {

@@ -31,9 +31,13 @@ public class Cidade implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "cidade")
 	private List<Hotel> hoteis = new ArrayList<>();
-	@Transient
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cidade")
 	private List<Restaurante> restaurantes = new ArrayList<>();
-	@Transient
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cidade")
 	private List<Pacote> pacotes = new ArrayList<>();
 	
 	public Cidade() {

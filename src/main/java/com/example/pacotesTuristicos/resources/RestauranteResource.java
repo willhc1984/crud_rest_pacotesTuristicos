@@ -1,10 +1,10 @@
 package com.example.pacotesTuristicos.resources;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,36 +13,33 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.pacotesTuristicos.model.Hotel;
-import com.example.pacotesTuristicos.services.HotelService;
+import com.example.pacotesTuristicos.model.Restaurante;
+import com.example.pacotesTuristicos.services.RestauranteService;
 
 @RestController
-@RequestMapping(value = "/hoteis")
-public class HotelResource {
+@RequestMapping(value = "/restaurantes")
+public class RestauranteResource {
 	
 	@Autowired
-	private HotelService service;
+	private RestauranteService service;
 	
 	@GetMapping
-	public List<Hotel> buscarTodos(){
-		List<Hotel> hoteis = service.buscarTodos();
-		return hoteis;
+	public List<Restaurante> buscarTodos(){
+		List<Restaurante> restaurantes = service.buscarTodos();
+		return restaurantes;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Hotel buscarPorId(@PathVariable Integer id) {
-		Hotel hotel = service.buscarPorId(id);
-		return hotel;
+	public Restaurante buscarPorId(@PathVariable Integer id) {
+		Restaurante restaurante = service.buscarPorId(id);
+		return restaurante;
 	}
 	
 	@PostMapping
-	public ResponseEntity<Hotel> salvar(@RequestBody Hotel hotel){
-		service.salvar(hotel);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(hotel.getId()).toUri();
-		return ResponseEntity.created(uri).body(hotel);
+	public ResponseEntity<Restaurante> salvar(@RequestBody Restaurante restaurante){
+		service.salvar(restaurante);
+		return ResponseEntity.ok().body(restaurante);
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -52,10 +49,9 @@ public class HotelResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Hotel> atualizar(@PathVariable Integer id, @RequestBody Hotel hotel){
-		hotel = service.atualizar(id, hotel);
-		return ResponseEntity.ok().body(hotel);
+	public ResponseEntity<Restaurante> atualizar(@PathVariable Integer id, @RequestBody Restaurante restaurante){
+		restaurante = service.atualizar(id, restaurante);
+		return ResponseEntity.ok().body(restaurante);
 	}
-	
-	
+
 }

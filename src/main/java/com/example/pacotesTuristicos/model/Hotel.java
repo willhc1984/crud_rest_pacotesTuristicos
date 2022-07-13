@@ -11,8 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_hotel")
@@ -26,9 +29,11 @@ public class Hotel implements Serializable{
 	private String nome;
 	private Double valorDiaria;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne
 	private Cidade cidade;
-	@Transient
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "hotel")
 	private List<Pacote> pacotes = new ArrayList<>();
 	
 	public Hotel() {
