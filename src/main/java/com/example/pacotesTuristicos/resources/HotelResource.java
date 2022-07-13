@@ -1,5 +1,6 @@
 package com.example.pacotesTuristicos.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.pacotesTuristicos.model.Hotel;
 import com.example.pacotesTuristicos.services.HotelService;
@@ -38,7 +40,9 @@ public class HotelResource {
 	@PostMapping
 	public ResponseEntity<Hotel> salvar(@RequestBody Hotel hotel){
 		service.salvar(hotel);
-		return ResponseEntity.ok().body(hotel);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(hotel.getId()).toUri();
+		return ResponseEntity.created(uri).body(hotel);
 	}
 	
 }
