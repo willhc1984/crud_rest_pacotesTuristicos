@@ -10,7 +10,8 @@ Deseja-se fazer um sistema para manter dados de cidades (nome, estado, website),
 cada cidade possui um ou mais restaurantes (nome, valor da refeição) e hotéis (nome, valor da diária).
 Além disso, deseja-se registrar pacotes turísticos vendidos. Para registrar um pacote turístico, deve-se
 escolher uma cidade, definir a data da viagem, o hotel de hospedagem e o número de dias de
-permanência. Deve-se também definir se no p
+permanência. Deve-se também definir se no pacote vai estar incluso ou não um restaurante e, se sim,
+quantas refeições por dia serão consumidas.
 
 ## UML - Modelo conceitual
 ![Mobile 1](crud_rest_pacotesTuristicos.png)
