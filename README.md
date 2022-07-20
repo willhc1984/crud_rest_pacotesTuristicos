@@ -18,11 +18,12 @@ quantas refeições por dia serão consumidas.
 
 # Tecnologias utilizadas
 ## Back end
-- Java
-- Spring Boot
+- Java 17
+- Spring Boot 2.7.1
 - JPA / Hibernate
 - Maven
 - Banco de dados H2.
+- Spring Tool Suite 4
 
 # Autor
 
