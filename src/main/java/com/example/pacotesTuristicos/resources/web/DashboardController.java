@@ -1,8 +1,11 @@
 package com.example.pacotesTuristicos.resources.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.pacotesTuristicos.model.Cidade;
 
 @Controller
 @RequestMapping(value = "/dashboard")
@@ -29,7 +32,9 @@ public class DashboardController {
 	}
 	
 	@GetMapping(value = "/cidades/cadastro")
-	public String cadcidades() {
+	public String cadcidades(ModelMap model) {
+		model.put("cidade", new Cidade());
+		model.toString();
 		return "cad-cidades";
 	}
 	

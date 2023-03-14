@@ -11,32 +11,30 @@
     
     <div class="container">
       <h1>Cadastrar cidade</h1>
-      <form>
+      <form th:action="@{/dashboard/cidades}" th:object="${cidade}" method="POST">
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
-            <label for="exampleInputEmail1" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" th:field="${cidade.nome}" name="nome" id="nome">
           </div>
         </div>
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
             <label for="select" class="form-label">Estado</label>
-            <select class="form-select" aria-label="Default select example" id="select">
-              <option selected>Selecione o estado</option>
-              <option value="1">SP</option>
-              <option value="2">RJ</option>
-              <option value="3">MG</option>
-              <option value="3">PE</option>
-              <option value="3">CE</option>
-              <option value="3">AL</option>
-              <option value="3">AP</option>
+            <select class="form-select" th:field="${cidade.estado}" name="estado" id="select">
+              <option th:value="SP">SP</option>
+              <option th:value="MG">MG</option>
+              <option th:value="RJ">RJ</option>
+              <option th:value="RS">RS</option>
+              <option th:value="PE">PE</option>
+              <option th:value="AL">AL</option>              
             </select>
           </div>
         </div>
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
-            <label for="exampleInputPassword1" class="form-label">Web site</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="website" class="form-label">Web site</label>
+            <input type="text" class="form-control" th:field="${cidade.website}" name="website" id="website">
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
