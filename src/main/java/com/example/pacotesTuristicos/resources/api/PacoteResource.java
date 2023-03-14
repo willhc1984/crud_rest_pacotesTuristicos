@@ -1,4 +1,4 @@
-package com.example.pacotesTuristicos.resources;
+package com.example.pacotesTuristicos.resources.api;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.example.pacotesTuristicos.model.Pacote;
 import com.example.pacotesTuristicos.services.PacoteService;
 
 @RestController
-@RequestMapping(value = "/pacotes")
+@RequestMapping(value = "/api/pacotes")
 public class PacoteResource {
 	
 	@Autowired

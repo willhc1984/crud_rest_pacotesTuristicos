@@ -1,9 +1,7 @@
-package com.example.pacotesTuristicos.resources;
+package com.example.pacotesTuristicos.resources.api;
 
 import java.net.URI;
 import java.util.List;
-
-import javax.servlet.Servlet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.pacotesTuristicos.model.Cidade;
-import com.example.pacotesTuristicos.services.CidadeService;
+import com.example.pacotesTuristicos.model.Hotel;
+import com.example.pacotesTuristicos.services.HotelService;
 
 @RestController
-@RequestMapping(value = "/cidades")
-public class CidadeResource {
+@RequestMapping(value = "/api/hoteis")
+public class HotelResource {
 	
 	@Autowired
-	private CidadeService service;
+	private HotelService service;
 	
 	@GetMapping
-	public List<Cidade> buscarTodos(){
-		List<Cidade> cidades = service.buscarTodos();
-		return cidades;
+	public List<Hotel> buscarTodos(){
+		List<Hotel> hoteis = service.buscarTodos();
+		return hoteis;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Cidade> buscarPorId(@PathVariable Integer id) {
-		Cidade cidade = service.buscarPorId(id);
-		return ResponseEntity.ok().body(cidade);
+	public Hotel buscarPorId(@PathVariable Integer id) {
+		Hotel hotel = service.buscarPorId(id);
+		return hotel;
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cidade> salvar(@RequestBody Cidade cidade){
-		cidade = service.salvar(cidade);
+	public ResponseEntity<Hotel> salvar(@RequestBody Hotel hotel){
+		service.salvar(hotel);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(cidade.getId()).toUri();
-		return ResponseEntity.created(uri).body(cidade);
+				.buildAndExpand(hotel.getId()).toUri();
+		return ResponseEntity.created(uri).body(hotel);
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -54,9 +52,10 @@ public class CidadeResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Cidade> atualizar(@PathVariable Integer id, @RequestBody Cidade cidade){
-		cidade = service.atualizar(id, cidade);
-		return ResponseEntity.ok().body(cidade);
+	public ResponseEntity<Hotel> atualizar(@PathVariable Integer id, @RequestBody Hotel hotel){
+		hotel = service.atualizar(id, hotel);
+		return ResponseEntity.ok().body(hotel);
 	}
-
+	
+	
 }
