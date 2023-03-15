@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,6 +27,7 @@ public class Hotel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY	)
 	private Integer id;
+	@NotBlank(message = "*Campo obrigatório.")
 	private String nome;
 	private Double valorDiaria;
 	

@@ -10,37 +10,42 @@
     <div th:replace="fragments/nav-dashboard"></div>
     
     <div class="container">
-      <h1>Cadastrar cidade</h1>
-      <form th:action="@{/dashboard/cidades}" th:object="${cidade}" method="POST">
-        <div class="row col-lg-4 col-md-6">
-          <div class="mb-1">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" th:field="${cidade.nome}" name="nome" id="nome">
-          </div>
-        </div>
-        <div class="row col-lg-4 col-md-6">
-          <div class="mb-1">
-            <label for="select" class="form-label">Estado</label>
-            <select class="form-select" th:field="${cidade.estado}" name="estado" id="select">
-              <option th:value="SP">SP</option>
-              <option th:value="MG">MG</option>
-              <option th:value="RJ">RJ</option>
-              <option th:value="RS">RS</option>
-              <option th:value="PE">PE</option>
-              <option th:value="AL">AL</option>              
-            </select>
-          </div>
-        </div>
-        <div class="row col-lg-4 col-md-6">
-          <div class="mb-1">
-            <label for="website" class="form-label">Web site</label>
-            <input type="text" class="form-control" th:field="${cidade.website}" name="website" id="website">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-      </form>
+    	<div th:replace="fragments/alerts"></div>
+      	<h1>Cadastrar cidade</h1>
+	      <form th:action="@{/dashboard/cidades}" th:object="${cidade}" method="POST">
+	        <div class="row col-lg-4 col-md-6">
+	          <div class="mb-1">
+	            <label for="nome" class="form-label">Nome</label>
+	            <input type="text" class="form-control" th:field="${cidade.nome}" name="nome" id="nome">
+				<p th:errors = "*{nome}" class="text-danger"
+	              th:if="${#fields.hasErrors('nome')}"></p>          
+	          </div>
+	        </div>
+	        <div class="row col-lg-4 col-md-6">
+	          <div class="mb-1">
+	            <label for="select" class="form-label">Estado</label>
+	            <select class="form-select" th:field="${cidade.estado}" name="estado" id="select">
+	              <option th:value="SP">SP</option>
+	              <option th:value="MG">MG</option>
+	              <option th:value="RJ">RJ</option>
+	              <option th:value="RS">RS</option>
+	              <option th:value="PE">PE</option>
+	              <option th:value="AL">AL</option>              
+	            </select>
+	          </div>
+	        </div>
+	        <div class="row col-lg-4 col-md-6">
+	          <div class="mb-1">
+	            <label for="website" class="form-label">Web site</label>
+	            <input type="text" class="form-control" th:field="${cidade.website}" name="website" id="website">
+	          	<p th:errors = "*{website}" class="text-danger"
+	              th:if="${#fields.hasErrors('website')}"></p>   
+	          </div>
+	        </div>
+	        <button type="submit" class="btn btn-primary">Cadastrar</button>
+	      </form>
     </div>
-   
+   	
    <div th:replace="fragments/footer"></div>
     
   </body>

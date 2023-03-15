@@ -24,10 +24,11 @@ public class Cidade implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@NotBlank(message = "Campo obrigatório.")
+	@NotBlank(message = "*Campo obrigatório.")
 	private String nome;
+	@NotBlank(message = "*Campo obrigatório.")
 	private String estado;
-	@NotBlank(message = "Campo obrigatório.")
+	@NotBlank(message = "*Campo obrigatório.")
 	private String website;
 	
 	@JsonIgnore
