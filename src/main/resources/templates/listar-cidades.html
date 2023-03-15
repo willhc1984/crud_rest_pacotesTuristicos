@@ -10,7 +10,31 @@
     <div th:replace="fragments/nav-dashboard"></div>
     
     <div class="container">
-      <h1>Cidades cadastradas</h1>
+      <h3>Cidades cadastradas</h3>
+      <a href="/dashboard/cidades/cadastrar/" class="btn btn-primary">Cadastrar</a>
+      <table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Nome</th>
+		      <th scope="col">Estado</th>
+		      <th scope="col">Website</th>
+		      <th scope="col">Ações</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="cidade : ${cidades}">
+		      <td th:text="${cidade.id}"></td>
+		      <td th:text="${cidade.nome}"></td>
+		      <td th:text="${cidade.estado}"></td>
+		      <td th:text="${cidade.website}"></td>
+		      <td>
+		      	<a href="#"><i class="bi bi-pen-fill"></i></a>
+		      	<a href="#"><i class="bi bi-trash3-fill"></i></a>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
       
     </div>
    

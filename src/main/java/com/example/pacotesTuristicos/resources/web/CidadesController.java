@@ -1,5 +1,7 @@
 package com.example.pacotesTuristicos.resources.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,8 @@ public class CidadesController {
 	
 	@GetMapping
 	public String listar(ModelMap model) {
-		model.put("cidade", new Cidade());
+		List<Cidade> cidades = cidadeService.buscarTodos();
+		model.put("cidades", cidades);
 		return "listar-cidades";
 	}
 	
