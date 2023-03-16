@@ -27,13 +27,16 @@
 	          <div class="mb-1">
 	            <label for="select" class="form-label">Estado</label>
 	            <select class="form-select" th:field="${cidade.estado}" name="estado" id="select">
+	              <option value="">Selecione...</option>
 	              <option th:value="SP">SP</option>
 	              <option th:value="MG">MG</option>
 	              <option th:value="RJ">RJ</option>
 	              <option th:value="RS">RS</option>
 	              <option th:value="PE">PE</option>
-	              <option th:value="AL">AL</option>              
+	              <option th:value="AL">AL</option>   
 	            </select>
+	            <p th:errors = "*{estado}" class="text-danger"
+	              th:if="${#fields.hasErrors('estado')}"></p>
 	          </div>
 	        </div>
 	        <div class="row col-lg-4 col-md-6">

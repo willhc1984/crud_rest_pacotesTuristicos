@@ -11,17 +11,29 @@
     
     <div class="container">
       <h1>Cadastrar hotel</h1>
-      <form>
+      <form th:action="(${hotel.id} != null) ? 
+	      					@{/dashboard/hoteis/{id}(id=${hotel.id})} : 
+	      					@{/dashboard/hoteis}"  th:object="${hotel}" method="POST">
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
-            <label for="exampleInputEmail1" class="form-label">Nome do hotel</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="nome" class="form-label">Nome do hotel</label>
+            <input type="text" class="form-control" id="nome">
           </div>
         </div>
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
-            <label for="exampleInputPassword1" class="form-label">Valor da diária</label>
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <label for="cidade" class="form-label">Cidade</label>
+            <select class="form-select" id="cidade" th:field="*{cidade.id}">
+            	<option value="">Selecione...</option>
+            	<option th:each="cidade : ${cidades}" th:value="${cidade.getId()}"
+            					th:text="${cidade.getNome()}"></option>
+            </select>
+          </div>
+        </div>
+        <div class="row col-lg-4 col-md-6">
+          <div class="mb-1">
+            <label for="diaria" class="form-label">Valor da diária</label>
+            <input type="text" class="form-control" id="diaria">
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -32,6 +44,37 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
 
+	    $("#cidade").blur(function(){
+	
+	        //get input value
+	        var cpf = $('#cpf').val();
+	
+	        $.ajax({
+	            type: "GET",
+	            async: "true",
+	            url: "/dashboard/cidades/",
+	            dataType: "jsonp",
+	            data: {nome:nome},
+	            success: function(data){
+	
+	                //debug result console
+	                console.log(data); 
+	
+	                //set input value
+	                $("#nome").val(data);
+	
+	            }
+	
+	        });
+	    });
+	});
+
+	</script>
+	
   </body>
 </html>

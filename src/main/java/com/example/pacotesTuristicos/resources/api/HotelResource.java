@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.pacotesTuristicos.model.Hotel;
+import com.example.pacotesTuristicos.services.CidadeService;
 import com.example.pacotesTuristicos.services.HotelService;
 
 @RestController
