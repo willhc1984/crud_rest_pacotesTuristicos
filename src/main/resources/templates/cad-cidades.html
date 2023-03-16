@@ -12,11 +12,13 @@
     <div class="container">
     	<div th:replace="fragments/alerts"></div>
       	<h1>Cadastrar cidade</h1>
-	      <form th:action="@{/dashboard/cidades}" th:object="${cidade}" method="POST">
+	      <form th:action="(${cidade.id} != null) ? 
+	      					@{/dashboard/cidades/{id}(id=${cidade.id})} : 
+	      					@{/dashboard/cidades}"  th:object="${cidade}" method="POST">
 	        <div class="row col-lg-4 col-md-6">
 	          <div class="mb-1">
 	            <label for="nome" class="form-label">Nome</label>
-	            <input type="text" class="form-control" th:field="${cidade.nome}" name="nome" id="nome">
+	            <input type="text" class="form-control" th:field="${cidade.nome}"  name="nome" id="nome">
 				<p th:errors = "*{nome}" class="text-danger"
 	              th:if="${#fields.hasErrors('nome')}"></p>          
 	          </div>

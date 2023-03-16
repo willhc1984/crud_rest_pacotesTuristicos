@@ -40,6 +40,13 @@ public class CidadesController {
 		return "listar-cidades";
 	}
 	
+	@GetMapping(value = "/{id}")
+	public String listarPorId(@PathVariable Integer id, ModelMap model) {
+		Cidade cidade = cidadeService.buscarPorId(id);
+		model.put("cidade", cidade);
+		return "cad-cidades";
+	}
+	
 	@PostMapping
 	public String salvar(@Valid @ModelAttribute Cidade cidade, BindingResult result,
 			RedirectAttributes attr, Model model) {
@@ -51,6 +58,20 @@ public class CidadesController {
 		
 		cidadeService.salvar(cidade);
 		attr.addFlashAttribute("success", "Cidade cadastrada!");
+		return "redirect:/dashboard/cidades/cadastro";
+	}
+	
+	@PostMapping(value = "/{id}")
+	public String editar(@Valid @ModelAttribute Cidade cidade, BindingResult result,
+			RedirectAttributes attr, Model model) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("cidade", cidade);
+			return "cad-cidades";
+		}
+		
+		cidadeService.salvar(cidade);
+		attr.addFlashAttribute("success", "Cidade editada!");
 		return "redirect:/dashboard/cidades/cadastro";
 	}
 	

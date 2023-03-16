@@ -30,8 +30,8 @@
 		      <td th:text="${cidade.estado}"></td>
 		      <td th:text="${cidade.website}"></td>
 		      <td>
-		      	<a href="/"><i class="bi bi-pen-fill"></i></a>
-		      	<a th:href="@{/dashboard/cidades/excluir/{id}(id=${cidade.id})}"><i class="bi bi-trash3-fill"></i></a>
+		      	<a th:href="@{/dashboard/cidades/{id}(id=${cidade.id})}"><i class="bi bi-pen-fill"></i></a>
+		      	<a th:href="@{/dashboard/cidades/excluir/{id}(id=${cidade.id})}" onclick="return confirm('Confirma exclusão?')"><i class="bi bi-trash3-fill"></i></a>
 		      </td>
 		    </tr>
 		  </tbody>
