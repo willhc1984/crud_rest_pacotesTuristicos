@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,11 +30,11 @@ public class Hotel implements Serializable{
 	private Integer id;
 	@NotBlank(message = "*Campo obrigatório.")
 	private String nome;
-	@DecimalMin(value = "0.1", inclusive = true)
+	@NotNull(message = "Valor não pode ser nulo.")
 	private Double valorDiaria;
 	
 	@ManyToOne
-	//@NotBlank(message = "*Campo obrigatório.")
+	@NotNull(message = "*Campo obrigatório.")
 	private Cidade cidade;
 	
 	@JsonIgnore

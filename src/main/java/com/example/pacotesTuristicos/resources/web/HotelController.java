@@ -34,7 +34,7 @@ public class HotelController {
 	@GetMapping(value = "/cadastrar")
 	public String criar(ModelMap model) {
 		model.put("hotel", new Hotel());
-		model.put("cidade", new Cidade());
+		//model.put("cidade", new Cidade());
 		List<Cidade> cidades = cidadeService.buscarTodos();
 		model.put("cidades", cidades);
 		return "cad-hoteis";
@@ -58,11 +58,9 @@ public class HotelController {
 	public String salvar(@Valid @ModelAttribute Hotel hotel, BindingResult result,
 			RedirectAttributes attr, Model model) {
 		
-		System.out.println(hotel);
-		
 		if(result.hasErrors()) {
 			model.addAttribute("hotel", hotel);
-			model.toString();
+			model.addAttribute("cidades", cidadeService.buscarTodos());
 			return "cad-hoteis";
 		}
 		
