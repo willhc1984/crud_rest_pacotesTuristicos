@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,13 +24,15 @@ public class Hotel implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY	)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@NotBlank(message = "*Campo obrigatório.")
 	private String nome;
+	@DecimalMin(value = "0.1", inclusive = true)
 	private Double valorDiaria;
 	
 	@ManyToOne
+	//@NotBlank(message = "*Campo obrigatório.")
 	private Cidade cidade;
 	
 	@JsonIgnore
@@ -77,6 +78,10 @@ public class Hotel implements Serializable{
 		return cidade;
 	}
 
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
 	public List<Pacote> getPacotes() {
 		return pacotes;
 	}
@@ -104,27 +109,6 @@ public class Hotel implements Serializable{
 			return false;
 		Hotel other = (Hotel) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("ID: ");
-		sb.append(id + "\n");
-		sb.append("Nome: ");
-		sb.append(nome + "\n");
-		sb.append("Valor da Di�ria: ");
-		sb.append(valorDiaria + "\n");
-		sb.append("Cidade: ");
-		sb.append(cidade.getNome() + "\n");
-		for(Pacote p : pacotes) {
-			sb.append(p.getCidade() + "\n");
-			sb.append(p.getDataViagem() + "\n");
-		}
-		
-		
-		return sb.toString();
-	}
-	
+	}	
 	
 }

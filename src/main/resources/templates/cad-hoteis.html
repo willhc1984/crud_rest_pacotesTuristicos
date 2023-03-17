@@ -11,30 +11,35 @@
     
     <div class="container">
       <h1>Cadastrar hotel</h1>
-      <form th:action="(${hotel.id} != null) ? 
-	      					@{/dashboard/hoteis/{id}(id=${hotel.id})} : 
-	      					@{/dashboard/hoteis}"  th:object="${hotel}" method="POST">
+      <div th:replace="fragments/alerts"></div>
+      <form th:action="@{/dashboard/hoteis}"  th:object="${hotel}" method="POST">
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
             <label for="nome" class="form-label">Nome do hotel</label>
-            <input type="text" class="form-control" id="nome">
+            <input type="text" class="form-control" th:field="*{nome}" name="nome" id="nome">
+          	<p th:errors = "*{nome}" class="text-danger"
+	              th:if="${#fields.hasErrors('nome')}"></p>     
           </div>
         </div>
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
             <label for="cidade" class="form-label">Cidade</label>
-            <select class="form-select" id="cidade" th:field="*{cidade.id}">
+            <select class="form-select" id="cidade" th:field="*{cidade}">
             	<option value="">Selecione...</option>
             	<option th:each="cidade : ${cidades}" th:value="${cidade.getId()}"
             					th:text="${cidade.getNome()}"></option>
             </select>
+            <p th:errors = "*{cidade}" class="text-danger"
+	              th:if="${#fields.hasErrors('cidade')}"></p>     
           </div>
         </div>
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
             <label for="diaria" class="form-label">Valor da diária</label>
-            <input type="text" class="form-control" id="diaria">
+            <input type="number" class="form-control" th:field="*{valorDiaria}" name="valorDiaria" id="diaria">
           </div>
+          <p th:errors = "*{valorDiaria}" class="text-danger"
+	              th:if="${#fields.hasErrors('valorDiaria')}"></p>     
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
       </form>

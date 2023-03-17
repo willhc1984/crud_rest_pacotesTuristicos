@@ -58,14 +58,17 @@ public class HotelController {
 	public String salvar(@Valid @ModelAttribute Hotel hotel, BindingResult result,
 			RedirectAttributes attr, Model model) {
 		
+		System.out.println(hotel);
+		
 		if(result.hasErrors()) {
 			model.addAttribute("hotel", hotel);
+			model.toString();
 			return "cad-hoteis";
 		}
 		
 		hotelService.salvar(hotel);
 		attr.addFlashAttribute("success", "Hotel cadastrado!");
-		return "redirect:/dashboard/hoteis/cadastro";
+		return "redirect:/dashboard/hoteis/cadastrar";
 	}
 	
 	@PostMapping(value = "/{id}")
