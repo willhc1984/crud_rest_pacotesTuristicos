@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,9 +28,11 @@ public class Restaurante implements Serializable{
 	private Integer id;
 	@NotBlank(message = "*Campo obrigatório.")
 	private String nome;
+	@NotNull(message = "Valor não pode ser nulo.")
 	private Double valorRefeicao;
 	
 	@ManyToOne
+	@NotNull(message = "*Campo obrigatório.")
 	private Cidade cidade;
 	
 	@JsonIgnore

@@ -11,23 +11,35 @@
     
     <div class="container">
       <h1>Cadastrar restaurantes</h1>
-      <form>
+      <div th:replace="fragments/alerts"></div>
+      <form th:action="(${restaurante.id} != null) ? @{/dashboard/restaurantes/{id}(id=${restaurante.id})} :
+      					@{/dashboard/restaurantes}"  th:object="${restaurante}" method="POST">
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
-            <label for="exampleInputEmail1" class="form-label">Nome do restaurante</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="nome" class="form-label">Nome do restaurante</label>
+            <input type="text" class="form-control" th:field="*{nome}" id="nome">
+            <p th:errors = "*{nome}" class="text-danger"
+	              th:if="${#fields.hasErrors('nome')}"></p>  
           </div>
         </div>
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
-            <label for="exampleInputPassword1" class="form-label">Valor da refeição</label>
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <label for="refeicao" class="form-label">Valor da refeição</label>
+            <input type="text" class="form-control" th:field="*{valorRefeicao}" id="refeicao">
+            <p th:errors = "*{valorRefeicao}" class="text-danger"
+	              th:if="${#fields.hasErrors('valorRefeicao')}"></p>  
           </div>
         </div>
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
-            <label for="exampleInputPassword1" class="form-label">Cidade</label>
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <label for="cidade" class="form-label">Cidade</label>
+            <select class="form-select" id="cidade" th:field="*{cidade}">
+            	<option value="">Selecione...</option>
+            	<option th:each="cidade : ${cidades}" th:value="${cidade.getId()}"
+            					th:text="${cidade.getNome()}"></option>
+            </select>
+            <p th:errors = "*{cidade}" class="text-danger"
+	              th:if="${#fields.hasErrors('cidade')}"></p>     
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
