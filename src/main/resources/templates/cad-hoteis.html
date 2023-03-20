@@ -12,7 +12,8 @@
     <div class="container">
       <h1>Cadastrar hotel</h1>
       <div th:replace="fragments/alerts"></div>
-      <form th:action="@{/dashboard/hoteis}"  th:object="${hotel}" method="POST">
+      <form th:action="(${hotel.id} != null) ? @{/dashboard/hoteis/{id}(id=${hotel.id})} :
+      					@{/dashboard/hoteis}"  th:object="${hotel}" method="POST">
         <div class="row col-lg-4 col-md-6">
           <div class="mb-1">
             <label for="nome" class="form-label">Nome do hotel</label>

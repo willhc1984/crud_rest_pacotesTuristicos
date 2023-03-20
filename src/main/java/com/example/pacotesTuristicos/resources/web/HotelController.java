@@ -51,6 +51,8 @@ public class HotelController {
 	public String listarPorId(@PathVariable Integer id, ModelMap model) {
 		Hotel hotel = hotelService.buscarPorId(id);
 		model.put("hotel", hotel);
+		List<Cidade> cidades = cidadeService.buscarTodos();
+		model.put("cidades", cidades);
 		return "cad-hoteis";
 	}
 	
@@ -75,12 +77,13 @@ public class HotelController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("hotel", hotel);
+			model.addAttribute("cidades", cidadeService.buscarTodos());
 			return "cad-hoteis";
 		}
 		
 		hotelService.salvar(hotel);
 		attr.addFlashAttribute("success", "Hotel editado!");
-		return "redirect:/dashboard/hotels/cadastro";
+		return "redirect:/dashboard/hoteis/cadastrar";
 	}
 	
 	@GetMapping(value = "/excluir/{id}")
