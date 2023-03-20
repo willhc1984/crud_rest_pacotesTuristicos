@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/header"></div>
+  </head>
+  <body>
+    
+    <div style="padding-top: 80px;"></div>
+
+    <div th:replace="fragments/nav-dashboard"></div>
+    
+    <div class="container">
+      <h1>Cadastrar pacotes</h1>
+      <div th:replace="fragments/alerts"></div>
+      <form th:action="(${pacote.id} != null) ? @{/dashboard/pacotes/{id}(id=${pacote.id})} :
+      					@{/dashboard/pacotes}"  th:object="${pacote}" method="POST">
+        <div class="row col-lg-4 col-md-6">
+          <div class="mb-1">
+            <label for="data" class="form-label">Data da viagem</label>
+            <input type="date" class="form-control" th:field="*{dataViagem}" id="data">
+            <p th:errors = "*{dataViagem}" class="text-danger"
+	              th:if="${#fields.hasErrors('dataViagem')}"></p>  
+          </div>
+        </div>
+        <div class="row col-lg-4 col-md-6">
+          <div class="mb-1">
+            <label for="diarias" class="form-label">Diarias</label>
+            <input type="number" class="form-control" th:field="*{diasPermanencia}" id="diarias">
+            <p th:errors = "*{diasPermanencia}" class="text-danger"
+	              th:if="${#fields.hasErrors('diasPermanencia')}"></p>  
+          </div>
+        </div>
+        <div class="row col-lg-4 col-md-6">
+          <div class="mb-1">
+            <label for="refeicoes" class="form-label">Refeições por dia</label>
+            <input type="number" class="form-control" th:field="*{refeicoesPorDia}" id="refeicoes">
+            <p th:errors = "*{refeicoesPorDia}" class="text-danger"
+	              th:if="${#fields.hasErrors('refeicoesPorDia')}"></p>  
+          </div>
+        </div>
+        <div class="row col-lg-4 col-md-6">
+          <div class="mb-1">
+            <label for="cidade" class="form-label">Cidade</label>
+            <select class="form-select" id="cidade" th:field="*{cidade}">
+            	<option value="">Selecione...</option>
+            	<option th:each="cidade : ${cidades}" th:value="${cidade.getId()}"
+            					th:text="${cidade.getNome()}"></option>
+            </select>
+            <p th:errors = "*{cidade}" class="text-danger"
+	              th:if="${#fields.hasErrors('cidade')}"></p>     
+          </div>
+        </div>
+        <div class="row col-lg-4 col-md-6">
+          <div class="mb-1">
+            <label for="hotel" class="form-label">Hotel</label>
+            <select class="form-select" id="hotel" th:field="*{hotel}">
+            	<option value="">Selecione...</option>
+            	<option th:each="hotel : ${hoteis}" th:value="${hotel.getId()}"
+            					th:text="${hotel.getNome()}"></option>
+            </select>
+            <p th:errors = "*{cidade}" class="text-danger"
+	              th:if="${#fields.hasErrors('hotel')}"></p>     
+          </div>
+        </div>
+        <div class="row col-lg-4 col-md-6">
+          <div class="mb-1">
+            <label for="restaurante" class="form-label">Restaurante</label>
+            <select class="form-select" id="restaurante" th:field="*{restaurante}">
+            	<option value="">Selecione...</option>
+            	<option th:each="restaurante : ${restaurantes}" th:value="${restaurante.getId()}"
+            					th:text="${restaurante.getNome()}"></option>
+            </select>
+            <p th:errors = "*{restaurante}" class="text-danger"
+	              th:if="${#fields.hasErrors('restaurante')}"></p>     
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </div>
+   
+   <div th:replace="fragments/footer"></div>
+    
+  </body>
+</html>

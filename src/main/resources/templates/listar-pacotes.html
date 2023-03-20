@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/header"></div>
+  </head>
+  <body>
+    
+    <div style="padding-top: 80px;"></div>
+    
+    <div th:replace="fragments/nav-dashboard"></div>
+    
+    <div class="container">
+    	<div th:replace="fragments/alerts"></div>
+      <h3>Pacotes cadastrados</h3>
+      <a href="/dashboard/pacotes/cadastrar/" class="btn btn-primary">Cadastrar</a>
+      <table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Cidade</th>
+		      <th scope="col">Hotel</th>
+		      <th scope="col">Restaurante</th>
+		      <th scope="col">Data da viagem</th>
+		      <th scope="col">Diarias</th>
+		      <th scope="col">Refeições por dia</th>
+		      <th scope="col">Ações</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="pacote : ${pacotes}">
+		      <td th:text="${pacote.id}"></td>
+		      <td th:text="${pacote.cidade.nome}"></td>
+		      <td th:text="${pacote.hotel.nome}"></td>
+		      <td th:text="${pacote.restaurante.nome}"></td>
+		      <td th:text="${pacote.dataViagem}"></td>
+		      <td th:text="${pacote.diasPermanencia}"></td>
+		      <td th:text="${pacote.refeicoesPorDia}"></td>
+		      <td>
+		      	<a th:href="@{/dashboard/pacotes/{id}(id=${pacote.id})}"><i class="bi bi-pen-fill"></i></a>
+		      	<a th:href="@{/dashboard/pacotes/excluir/{id}(id=${pacote.id})}" onclick="return confirm('Confirma exclusão?')"><i class="bi bi-trash3-fill"></i></a>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+      
+    </div>
+   
+   <div th:replace="fragments/footer"></div>
+    
+  </body>
+</html>
