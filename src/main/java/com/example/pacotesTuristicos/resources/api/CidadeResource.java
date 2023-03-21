@@ -21,7 +21,7 @@ import com.example.pacotesTuristicos.model.Cidade;
 import com.example.pacotesTuristicos.services.CidadeService;
 
 @RestController
-@RequestMapping(value = "/api/cidades")
+@RequestMapping(value = "/api/cidades", produces="application/json")
 public class CidadeResource {
 	
 	@Autowired
