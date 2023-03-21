@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,18 +27,24 @@ public class Pacote implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotNull(message = "Defina uma data.")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataViagem;
+	@NotNull(message = "Campos obrigatório.")
 	private Integer diasPermanencia;
+	@NotNull(message = "Campos obrigatório.")
 	private Integer refeicoesPorDia;
 	
 	@ManyToOne
+	@NotNull(message = "Campos obrigatório.")
 	private Cidade cidade;
 	
 	@ManyToOne
+	@NotNull(message = "Campos obrigatório.")
 	private Restaurante restaurante;
 	
 	@ManyToOne
+	@NotNull(message = "Campos obrigatório.")
 	private Hotel hotel;
 	
 	public Pacote() {

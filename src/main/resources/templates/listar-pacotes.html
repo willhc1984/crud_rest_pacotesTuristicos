@@ -32,7 +32,7 @@
 		      <td th:text="${pacote.cidade.nome}"></td>
 		      <td th:text="${pacote.hotel.nome}"></td>
 		      <td th:text="${pacote.restaurante.nome}"></td>
-		      <td th:text="${pacote.dataViagem}"></td>
+		      <td th:text="${#dates.format(pacote.dataViagem, 'dd-MM-yyyy')}"></td>
 		      <td th:text="${pacote.diasPermanencia}"></td>
 		      <td th:text="${pacote.refeicoesPorDia}"></td>
 		      <td>
