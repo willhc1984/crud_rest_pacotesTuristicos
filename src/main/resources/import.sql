@@ -1,0 +1,1 @@
+insert into tb_users (id, username, password) values (1, 'will', '$2a$10$gy2YylnoEw27j1PfM9vMNuYtNU/OCNAvK0wPcRxG9gDJgviO2L9FO');

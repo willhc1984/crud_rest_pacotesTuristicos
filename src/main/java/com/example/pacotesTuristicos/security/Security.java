@@ -27,10 +27,11 @@ public class Security extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.headers().frameOptions().disable();
 		http.
 		authorizeRequests()
 		.antMatchers("/", "/pacotes", "/promocoes", "/contato", "/sobrenos","/register",
-				"/api/**", "/**/*.*").permitAll()
+				"/api/**", "/**/*.*", "/h2-console/**").permitAll()
 			.anyRequest().hasRole("USER")
 		.and()
 		.formLogin()
@@ -41,7 +42,7 @@ public class Security extends WebSecurityConfigurerAdapter{
 			.logoutUrl("/logout")
 			.permitAll()
 		.and()
-		.csrf().ignoringAntMatchers("/api/**");
+		.csrf().ignoringAntMatchers("/api/**", "/h2-console/**");
 	}
 
 }

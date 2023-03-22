@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.pacotesTuristicos.model.Cidade;
 import com.example.pacotesTuristicos.model.Hotel;
@@ -66,6 +68,9 @@ public class PacotesTuristicosApplication implements CommandLineRunner {
 		hotelRepository.saveAll(Arrays.asList(hotel1, hotel2, hotel3, hotel4, hotel5, hotel6, hotel7, hotel8));
 		restauranteRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5, r6, r7));
 		pacoteRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
+		
+		System.out.println(new BCryptPasswordEncoder().encode("123"));
+		
 	}
 
 }
