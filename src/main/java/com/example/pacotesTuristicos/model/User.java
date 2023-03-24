@@ -2,6 +2,7 @@ package com.example.pacotesTuristicos.model;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -22,11 +26,17 @@ public class User implements UserDetails, Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long userId;
 	@Column(nullable = false, unique = true)
 	private String username;
 	@Column(nullable = false)
 	private String password;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_users_roles",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<Role> roles;
 	
 	public User() {
 		
@@ -34,17 +44,16 @@ public class User implements UserDetails, Serializable {
 
 	public User(Long id, String username, String password) {
 		super();
-		this.id = id;
+		this.userId = id;
 		this.username = username;
-		this.password = password;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long id) {
+		this.userId = id;
 	}
 
 	public String getUsername() {
@@ -62,10 +71,10 @@ public class User implements UserDetails, Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(userId);
 	}
 
 	@Override
@@ -77,13 +86,12 @@ public class User implements UserDetails, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(userId, other.userId);
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.roles;
 	}
 
 	@Override

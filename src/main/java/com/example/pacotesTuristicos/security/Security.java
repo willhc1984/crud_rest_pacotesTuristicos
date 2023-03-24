@@ -33,7 +33,8 @@ public class Security extends WebSecurityConfigurerAdapter{
 		authorizeRequests()
 		.antMatchers("/", "/pacotes", "/promocoes", "/contato", "/sobrenos","/register",
 				"/api/**", "/**/*.*", "/h2-console/**").permitAll()
-			.anyRequest().authenticated()
+		.antMatchers("/dashboard/**").hasRole("ADMIN")
+		
 		.and()
 		.formLogin()
 			.loginPage("/login")
