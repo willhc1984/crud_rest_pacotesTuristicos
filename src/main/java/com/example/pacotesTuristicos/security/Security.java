@@ -1,5 +1,6 @@
 package com.example.pacotesTuristicos.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,6 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class Security extends WebSecurityConfigurerAdapter{
 	
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
+	
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -18,11 +22,8 @@ public class Security extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.passwordEncoder(getPasswordEncoder())
-		.withUser("will")
-		.password(getPasswordEncoder().encode("123"))
-		.roles("USER");
+		auth.userDetailsService(userDetailsService)
+			.passwordEncoder(getPasswordEncoder());
 	}
 	
 	@Override
@@ -32,7 +33,7 @@ public class Security extends WebSecurityConfigurerAdapter{
 		authorizeRequests()
 		.antMatchers("/", "/pacotes", "/promocoes", "/contato", "/sobrenos","/register",
 				"/api/**", "/**/*.*", "/h2-console/**").permitAll()
-			.anyRequest().hasRole("USER")
+			.anyRequest().authenticated()
 		.and()
 		.formLogin()
 			.loginPage("/login")
