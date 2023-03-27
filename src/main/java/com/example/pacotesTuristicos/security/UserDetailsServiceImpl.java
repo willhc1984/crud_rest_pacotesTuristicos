@@ -1,5 +1,7 @@
 package com.example.pacotesTuristicos.security;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +12,7 @@ import com.example.pacotesTuristicos.model.User;
 import com.example.pacotesTuristicos.repositories.UserRepository;
 
 @Service
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	@Autowired

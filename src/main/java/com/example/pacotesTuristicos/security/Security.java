@@ -29,8 +29,10 @@ public class Security extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.headers().frameOptions().disable();
-		http.
-		authorizeRequests()
+		http
+		.exceptionHandling().accessDeniedPage("/acessoNegado")
+		.and()
+		.authorizeRequests()
 		.antMatchers("/", "/pacotes", "/promocoes", "/contato", "/sobrenos","/register",
 				"/api/**", "/**/*.*", "/h2-console/**").permitAll()
 		.antMatchers("/dashboard/**").hasRole("ADMIN")

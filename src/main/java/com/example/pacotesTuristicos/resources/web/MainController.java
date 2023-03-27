@@ -40,5 +40,10 @@ public class MainController {
 	public String register() {
 		return "register";
 	}
+	
+	@GetMapping(value = "/acessoNegado")
+	public String acessoNegado() {
+		return "acessoNegado";
+	}
 
 }
