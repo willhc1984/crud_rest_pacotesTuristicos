@@ -28,8 +28,8 @@
 		      <td th:text="${user.username}"></td>
 		      <td th:text="${user.email}"></td>
 		      <td>
-		      	<a th:href="@{/dashboard/users/{id}(id=${user.userId})}"><i class="bi bi-pen-fill"></i></a>
-		      	<a th:href="@{/dashboard/users/excluir/{id}(id=${user.userId})}" onclick="return confirm('Confirma exclusão?')"><i class="bi bi-trash3-fill"></i></a>
+		      	<a th:href="@{/dashboard/usuarios/{id}(id=${user.userId})}"><i class="bi bi-pen-fill"></i></a>
+		      	<a th:href="@{/dashboard/usuarios/excluir/{id}(id=${user.userId})}" onclick="return confirm('Confirma exclusão?')"><i class="bi bi-trash3-fill"></i></a>
 		      </td>
 		    </tr>
 		  </tbody>

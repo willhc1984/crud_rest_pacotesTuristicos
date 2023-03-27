@@ -1,13 +1,13 @@
 package com.example.pacotesTuristicos.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -41,7 +42,7 @@ public class User implements UserDetails, Serializable {
 	@JoinTable(name = "tb_users_roles",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
+	private List<Role> roles = new ArrayList<Role>();
 	
 	public User() {
 		
@@ -88,6 +89,10 @@ public class User implements UserDetails, Serializable {
 		this.email = email;
 	}
 
+	public List<Role> getRoles() {
+		return roles;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(userId);
@@ -132,6 +137,12 @@ public class User implements UserDetails, Serializable {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", roles=" + roles + "]";
 	}	
 
 }
