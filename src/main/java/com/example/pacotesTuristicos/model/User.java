@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,9 +29,12 @@ public class User implements UserDetails, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
+	@NotBlank(message = "Campo obrigatório.")
 	@Column(nullable = false, unique = true)
 	private String username;
+	private String email;
 	@Column(nullable = false)
+	@NotBlank(message = "Campo obrigatório.")
 	private String password;
 	
 	@ManyToMany
@@ -43,10 +47,13 @@ public class User implements UserDetails, Serializable {
 		
 	}
 
-	public User(Long id, String username, String password) {
+	public User(Long userId, String username, String email, String password, List<Role> roles) {
 		super();
-		this.userId = id;
+		this.userId = userId;
 		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
 	}
 
 	public Long getUserId() {
@@ -73,6 +80,14 @@ public class User implements UserDetails, Serializable {
 		this.password = password;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(userId);

@@ -10,37 +10,44 @@
     <div th:replace="fragments/nav-dashboard"></div>
     
     <div class="container">
-      <h1>Cadastrar usuário</h1>
-      <form>
-        <div class="row col-lg-4 col-md-6">
-          <div class="mb-1">
-            <label for="exampleInputEmail1" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          </div>
-        </div>
-        <div class="row col-lg-4 col-md-6">
-          <div class="mb-1">
-            <label for="exampleInputPassword1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleInputPassword1">
-          </div>
-        </div>
-        <div class="row col-lg-4 col-md-6">
-          <div class="mb-1">
-            <label for="exampleInputPassword1" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-          </div>
-        </div>
-        <div class="row col-lg-4 col-md-6">
-          <div class="mb-1">
-            <label for="exampleInputPassword1" class="form-label">Repita a senha</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-      </form>
-    </div>
+      	<h1>Cadastrar usuário</h1>
+      	<div th:replace="fragments/alerts"></div>
+	      <form th:action="@{/dashboard/usuarios}" th:object="${user}" method="POST">
+	        <div class="row col-lg-4 col-md-6">
+	          <div class="mb-1">
+	            <label for="nome" class="form-label">Nome</label>
+	            <input type="text" class="form-control" th:field="*{username} "id="nome">
+	            <p th:errors="*{username}" class="text-danger"
+	            	th:if="${#fields.hasErrors('username')}"></p>
+	          </div>
+	        </div>
+	        <div class="row col-lg-4 col-md-6">
+	          <div class="mb-1">
+	            <label for="email" class="form-label">Email</label>
+	            <input type="email"  th:field="*{email} "id="email" class="form-control">
+	            <p th:errors="*{email}" class="text-danger"
+	            	th:if="${#fields.hasErrors('email')}"></p>
+	          </div>
+	        </div>
+	        <div class="row col-lg-4 col-md-6">
+	          <div class="mb-1">
+	            <label for="password" class="form-label">Senha</label>
+	            <input type="password" th:field="*{password}" class="form-control" id="password">
+	            <p th:errors="*{password}" class="text-danger"
+	            	th:if="${#fields.hasErrors('password')}"></p>
+	          </div>
+	        </div>
+	        <div class="row col-lg-4 col-md-6">
+	          <div class="mb-1">
+	            <label for="password2" class="form-label">Repita a senha</label>
+	            <input type="password" class="form-control" id="password2">
+	          </div>
+	        </div>
+	        <button type="submit" class="btn btn-primary">Cadastrar</button>
+	      </form>
+	    </div>
    
-   <div th:replace="fragments/footer"></div>
+   		<div th:replace="fragments/footer"></div>
     
   </body>
 </html>

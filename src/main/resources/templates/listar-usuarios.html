@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/header"></div>
+  </head>
+  <body>
+    
+    <div style="padding-top: 80px;"></div>
+    
+    <div th:replace="fragments/nav-dashboard"></div>
+    
+    <div class="container">
+    	<div th:replace="fragments/alerts"></div>
+      <h3>Usuarios cadastrados</h3>
+      <a href="/dashboard/usuarios/cadastrar/" class="btn btn-primary">Cadastrar</a>
+      <table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Nome</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Ações</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="user : ${users}">
+		      <td th:text="${user.userId}"></td>
+		      <td th:text="${user.username}"></td>
+		      <td th:text="${user.email}"></td>
+		      <td>
+		      	<a th:href="@{/dashboard/users/{id}(id=${user.userId})}"><i class="bi bi-pen-fill"></i></a>
+		      	<a th:href="@{/dashboard/users/excluir/{id}(id=${user.userId})}" onclick="return confirm('Confirma exclusão?')"><i class="bi bi-trash3-fill"></i></a>
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+      
+    </div>
+   
+   <div th:replace="fragments/footer"></div>
+    
+  </body>
+</html>
