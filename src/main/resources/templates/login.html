@@ -23,7 +23,7 @@
                           <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Acessar</p>
           
                           <form class="mx-1 mx-md-4" action="" method="POST">
-                          	
+                          	<div th:replace="fragments/alerts"></div>
                           	<div th:if="${param.logout != null}">
 							    <div class="alert alert-success alert-dismissible fade show" role="alert">
 								  Você foi desconectado.

@@ -90,6 +90,7 @@ public class UserController {
 		attr.addFlashAttribute("success", "Usuario cadastrado!");
 		return "redirect:/dashboard/usuarios/cadastrar";
 	}
+
 	
 	@PostMapping(value = "/{id}")
 	public String editar(@Valid @ModelAttribute User user, BindingResult result,
