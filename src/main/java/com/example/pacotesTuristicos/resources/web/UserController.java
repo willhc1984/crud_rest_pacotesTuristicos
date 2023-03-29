@@ -37,6 +37,9 @@ public class UserController {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	@GetMapping(value = "/cadastrar")
 	public String criar(ModelMap model) {
 		model.put("user", new User());
@@ -66,6 +69,14 @@ public class UserController {
 			return "redirect:/dashboard/usuarios/cadastrar";
 		}
 		
+		System.out.println(user.getUsername());
+		Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
+		
+		if(userOptional.isPresent()) {
+			attr.addFlashAttribute("fail", "Nome de usuario ou email já esta em uso!");
+			return "redirect:/dashboard/usuarios/cadastrar";
+		}
+
 		if(result.hasErrors()) {
 			model.addAttribute("user", user);
 			return "cad-usuarios";

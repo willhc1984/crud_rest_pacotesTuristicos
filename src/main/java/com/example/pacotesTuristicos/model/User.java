@@ -33,6 +33,8 @@ public class User implements UserDetails, Serializable {
 	@NotBlank(message = "Campo obrigatório.")
 	@Column(nullable = false, unique = true)
 	private String username;
+	@Column(nullable = false, unique = true)
+	@NotBlank(message = "Campos obrigatório.")
 	private String email;
 	@Column(nullable = false)
 	@NotBlank(message = "Campo obrigatório.")
