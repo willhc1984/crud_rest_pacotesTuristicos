@@ -26,24 +26,52 @@
 	                  <a class="nav-link" href="/sobrenos">Sobre nós</a>
 	              </li>
 	          </ul>
-	          <i class="bi bi-person-circle ml-left" style="font-size: 30px;"></i>
-	          <ul class="navbar-nav ml-right" style="margin-right: 60px;">
-	              <li class="nav-item dropdown">
-	                  <a class="nav-link dropdown-toggle" href="/login" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                  Entrar
-	                  </a>
-	                  <ul class="dropdown-menu dropdown-menu-right mr-4">
-	                     <li><a class="dropdown-item" href="/login">Login</a></li>
-	                     <li><a class="dropdown-item" href="/pedidos">Meus pedidos</a></li>
-	                      <li class="nav-item">
-		                  	<form action="/logout" method="POST">
-		                  		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-		                  		<button class="btn btn-link" type="submit">Sair</button>
-		                  	</form>
-	                     </li>
-	                  </ul>
-	              </li>
-	          </ul>          
+	         
+	          <div sec:authorize="!isAuthenticated()">
+		           <ul class="navbar-nav ml-right" style="margin-right: 60px;">
+		          	<i class="bi bi-person-circle ml-left" style="font-size: 30px;"></i>
+		              <li class="nav-item dropdown">
+		                  <a class="nav-link dropdown-toggle" href="/login" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		                  Entrar
+		                  </a>
+		                  <ul class="dropdown-menu dropdown-menu-right mr-4">
+		                     <li><a class="dropdown-item" href="/login">Login</a></li>		                     
+		                     <div sec:authorize="isAuthenticated()"> 
+		                     <li class="nav-item">
+			                  	<form action="/logout" method="POST">
+			                  		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			                  		<button class="btn btn-link" type="submit">Sair</button>
+			                  	</form>
+		                     </li>
+		                     </div>
+		                  </ul>
+		              </li>
+		          </ul>  
+	          </div>              
+	          
+	           <div sec:authorize="isAuthenticated()">
+		           <ul class="navbar-nav ml-right" style="margin-right: 60px;">
+		          	<i class="bi bi-person-circle ml-left" style="font-size: 30px;"></i>
+		              <li class="nav-item dropdown">
+		                  <a class="nav-link dropdown-toggle" href="/login" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		                  	<span sec:authentication="principal.username"></span>
+		                  </a>
+		                  <ul class="dropdown-menu dropdown-menu-right mr-4">
+		                     <li><a class="dropdown-item" href="/login">Login</a></li>
+		                     <li><a class="dropdown-item" href="/pedidos">Meus pedidos</a></li>
+		                     <div sec:authorize="isAuthenticated()"> 
+		                     <li class="nav-item">
+			                  	<form action="/logout" method="POST">
+			                  		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			                  		<button class="btn btn-link" type="submit">Sair</button>
+			                  	</form>
+		                     </li>
+		                     </div>
+		                  </ul>
+		              </li>
+		          </ul>  
+	          </div>          
+	          
 	      </div>
 	  </div>
 	</nav>
