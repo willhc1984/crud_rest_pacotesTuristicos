@@ -6,8 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -57,6 +57,7 @@ public class UserController {
 	public String listarPorId(@PathVariable Long id, ModelMap model) {
 		User user = userService.buscarPorId(id);
 		model.put("user", user);
+		System.out.println(user);
 		return "cad-usuarios";
 	}
 	
@@ -94,8 +95,10 @@ public class UserController {
 	
 	@PostMapping(value = "/{id}")
 	public String editar(@Valid @ModelAttribute User user, BindingResult result,
-			RedirectAttributes attr, Model model, @RequestParam(value = "confirm") String confirm) {
+			RedirectAttributes attr, Model model, @PathVariable Long id,
+			@RequestParam(value = "confirm") String confirm) {
 		
+		System.out.println(user);
 		
 		if(!confirm.equals(user.getPassword())) {
 			attr.addFlashAttribute("fail", "Senhas não correspondem!");
@@ -108,14 +111,25 @@ public class UserController {
 		}
 		
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		user.setUserId(id);
 		userService.salvar(user);
 		System.out.println(user.toString());
 		attr.addFlashAttribute("success", "Usuario editado!");
-		return "redirect:/dashboard/users/cadastrar";
+		return "redirect:/dashboard/usuarios/cadastrar";
 	}
 	
 	@GetMapping(value = "/excluir/{id}")
-	public String excluir(@PathVariable Long id, RedirectAttributes attr) {
+	public String excluir(@AuthenticationPrincipal User loggedUser, @PathVariable Long id, RedirectAttributes attr) {
+		
+		User user = userService.buscarPorId(id);
+		System.out.println(user);
+		System.out.println(loggedUser);
+		
+		if(user.getUserId() == loggedUser.getUserId()) {
+			attr.addFlashAttribute("fail", "Usuario logado não pode ser deletado!");
+			return "redirect:/dashboard/usuarios";
+		}
+		
 		try {
 			userService.apagar(id);
 			attr.addFlashAttribute("success", "Usuario excluido!");

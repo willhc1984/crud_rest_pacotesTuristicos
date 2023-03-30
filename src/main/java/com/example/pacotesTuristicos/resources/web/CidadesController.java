@@ -65,6 +65,8 @@ public class CidadesController {
 	public String editar(@Valid @ModelAttribute Cidade cidade, BindingResult result,
 			RedirectAttributes attr, Model model) {
 		
+		System.out.println(cidade);
+		
 		if(result.hasErrors()) {
 			model.addAttribute("cidade", cidade);
 			return "cad-cidades";
