@@ -1,5 +1,6 @@
 package com.example.pacotesTuristicos.resources.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -12,15 +13,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.pacotesTuristicos.enums.RoleName;
+import com.example.pacotesTuristicos.model.Pacote;
 import com.example.pacotesTuristicos.model.Role;
 import com.example.pacotesTuristicos.model.User;
 import com.example.pacotesTuristicos.repositories.RoleRepository;
 import com.example.pacotesTuristicos.repositories.UserRepository;
+import com.example.pacotesTuristicos.services.PacoteService;
 import com.example.pacotesTuristicos.services.UserService;
 
 @Controller
@@ -35,9 +39,19 @@ public class MainController {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private PacoteService pacoteService;
+	
 	@GetMapping(value = "/")
 	public String index() {
 		return "index";
+	}
+	
+	@GetMapping(value = "/busca")
+	public String listarPorNome(@RequestParam(value = "busca") String busca, ModelMap model) {
+		List<Pacote> pacotes = pacoteService.buscarPorNome(busca);
+		model.put("pacotes", pacotes);
+		return "busca";
 	}
 	
 	@GetMapping(value = "/pacotes")

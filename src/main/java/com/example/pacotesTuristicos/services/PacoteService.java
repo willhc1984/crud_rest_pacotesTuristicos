@@ -44,6 +44,11 @@ public class PacoteService {
 		obj.setDiasPermanencia(pacote.getDiasPermanencia());
 		obj.setRefeicoesPorDia(pacote.getRefeicoesPorDia());
 	}
+
+	public List<Pacote> buscarPorNome(String nome) {
+		List<Pacote> pacotes = repository.findByCidade_Nome(nome);
+		return pacotes;
+	}
 	
 	
 }

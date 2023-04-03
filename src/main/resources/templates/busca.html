@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<div th:replace="fragments/header :: header"></div>
+  </head>
+  <body>
+    
+    <div style="padding-top: 80px;"></div>
+	
+	<div th:replace="fragments/nav"></div>
+	
+	<div class="container">
+		<h3>Pacotes disponiveis</h3>
+			<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Destino</th>
+			      <th scope="col">Data</th>
+			      <th scope="col">Diarias</th>
+			      <th scope="col">Restaurante</th>
+			      <th scope="col">Hotel</th>
+			      <th scope="col">Refeições diarias</th>
+			      <th scope="col">Ações</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="pacote : ${pacotes}">
+			      <td th:text="${pacote.id}"></td>
+			      <td th:text="${pacote.cidade.nome}"></td>
+			      <td th:text="${#dates.format(pacote.dataViagem, 'dd-MM-yyyy')}"></td>
+			      <td th:text="${pacote.diasPermanencia}"></td>
+			      <td th:text="${pacote.restaurante.nome}"></td>
+			      <td th:text="${pacote.hotel.nome}"></td>
+			      <td th:text="${pacote.refeicoesPorDia}"></td>
+			      <td>
+			      	<button type="button" class="btn btn-success btn-sm">Comprar  &nbsp; &nbsp;&nbsp;<i class="bi bi-cash-coin"></i></button>
+			      </td>
+			    </tr>
+			  </tbody>
+			</table>
+				
+		<div th:if="${pacotes.isEmpty}">
+			<div class="alert alert-danger" role="alert">
+				Não há pacotes para esse destino
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="fragments/footer"></div>
+  
+  </body>
+</html>

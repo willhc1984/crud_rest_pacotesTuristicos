@@ -1,48 +1,19 @@
 <div th:fragment="busca" remove="tag">
 
-<div class="container busca" id="busca">
+<div class="container-fluid busca" id="busca">
   <div style="height: 70px;"></div>
   <h4 class="row d-flex justify-content-center">Selecione seu destino...</h4>
-  <form>
+  <form th:action="@{/busca}">
     <div class="card text-dark bg-warning mb-3">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <div class="input-group input-group-md">
-              <span class="input-group-text" id="inputGroup-sizing-lg">Origem</span>
-              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="input-group input-group-md">
-              <span class="input-group-text" id="inputGroup-sizing-lg">Destino</span>
-              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="input-group input-group-md">
-              <span class="input-group-text" id="inputGroup-sizing-lg">Data de ida</span>
-              <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="input-group input-group-md">
-              <span class="input-group-text" id="inputGroup-sizing-lg">Data de volta</span>
-              <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="input-group input-group-md">
-              <span class="input-group-text" id="inputGroup-sizing-lg">Nº de viajantes</span>
-              <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-            </div>
-          </div>
-          <div class="col-6 col-sm-12">
-            <div class="input-group input-group-lg">
-              <button type="submit" class="btn btn-primary">Buscar pacotes</button>
-            </div>
-          </div>
+      <div class="card-body">        
+	    <div class="input-group input-group-lg" style="padding: 20px;">
+		  <span class="input-group-text" id="inputGroup-sizing-lg">Destino</span>
+		  <input type="text" class="form-control" th:name="busca">
+		</div>     
+        <div class="input-group input-group-lg justify-content-center" style="padding: 20px;">
+          <button type="submit" class="btn btn-primary">Buscar pacotes</button>
         </div>
+       </div>
       </div>
     </div>
   </form>
