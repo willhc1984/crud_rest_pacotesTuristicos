@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.pacotesTuristicos.model.Pacote;
 import com.example.pacotesTuristicos.repositories.PacoteRepository;
 
 @Service
+@Component("valorTotal")
 public class PacoteService {
 	
 	@Autowired
@@ -50,5 +52,11 @@ public class PacoteService {
 		return pacotes;
 	}
 	
-	
+	public Double valorTotal(Integer id) {
+		Optional<Pacote> pacoteOptional = repository.findById(id);
+		Pacote pacote = pacoteOptional.get();
+		return (pacote.getHotel().getValorDiaria() * pacote.getDiasPermanencia()) + 
+				pacote.getRestaurante().getValorRefeicao() * pacote.getRefeicoesPorDia() * pacote.getDiasPermanencia();
+		
+	}
 }

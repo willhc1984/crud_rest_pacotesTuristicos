@@ -21,7 +21,7 @@
 			      <th scope="col">Restaurante</th>
 			      <th scope="col">Hotel</th>
 			      <th scope="col">Refeições diarias</th>
-			      <th scope="col">Ações</th>
+			      <th scope="col">Valor total</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -33,6 +33,7 @@
 			      <td th:text="${pacote.restaurante.nome}"></td>
 			      <td th:text="${pacote.hotel.nome}"></td>
 			      <td th:text="${pacote.refeicoesPorDia}"></td>
+			      <td th:text="${@valorTotal.valorTotal(pacote.id)}"></td>
 			      <td>
 			      	<button type="button" class="btn btn-success btn-sm">Comprar  &nbsp; &nbsp;&nbsp;<i class="bi bi-cash-coin"></i></button>
 			      </td>
