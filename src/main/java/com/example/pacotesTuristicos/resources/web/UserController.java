@@ -6,7 +6,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -119,13 +121,16 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/excluir/{id}")
-	public String excluir(@AuthenticationPrincipal User loggedUser, @PathVariable Long id, RedirectAttributes attr) {
+	public String excluir(@AuthenticationPrincipal org.springframework.security.core.userdetails.User loggedUser, @PathVariable Long id, RedirectAttributes attr) {
 		
 		User user = userService.buscarPorId(id);
-		System.out.println(user);
-		System.out.println(loggedUser);
 		
-		if(user.getUserId() == loggedUser.getUserId()) {
+		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		//System.out.println(loggedUser);
+		//System.out.println(authentication.getPrincipal());
+		
+		if(user.getUsername() == loggedUser.getUsername()) {
 			attr.addFlashAttribute("fail", "Usuario logado não pode ser deletado!");
 			return "redirect:/dashboard/usuarios";
 		}
