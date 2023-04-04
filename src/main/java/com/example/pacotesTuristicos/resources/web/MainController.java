@@ -47,6 +47,11 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping(value = "/pagamento")
+	public String pagamento() {
+		return "pagamento";
+	}
+	
 	@GetMapping(value = "/busca")
 	public String listarPorNome(@RequestParam(value = "busca") String busca, ModelMap model) {
 		List<Pacote> pacotes = pacoteService.buscarPorNome(busca);
