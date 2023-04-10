@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.pacotesTuristicos.model.Cidade;
 import com.example.pacotesTuristicos.services.CidadeService;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping(value = "/api/cidades")
+@CrossOrigin(origins = "*")
 public class CidadeResource {
 	
 	@Autowired

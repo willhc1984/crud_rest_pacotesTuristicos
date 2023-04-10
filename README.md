@@ -3,14 +3,14 @@
 
 # Sobre o projeto
 
-XTUR Pacotes Turisticos é um Projeto Java Web + API REST desenvolvida com SpringFramework. Simula um ecommerce onde o usuario poderá comprar pacotes de viagens. Essa aplicação esta baseada nos requisitos e diagrama UML abaixo, um exercicio do curso de Modelagem de Dados com UML (DevSuperior).
+XTUR Pacotes Turisticos é um Projeto Java Web + API REST desenvolvida com SpringFramework. Simula um ecommerce onde o usuario poderá comprar pacotes de viagens. Possui area administrativa e esta baseado nos requisitos e diagrama UML abaixo, um exercicio do curso de Modelagem de Dados com UML (DevSuperior).
 
 ## Requisitos
 Deseja-se fazer um sistema para manter dados de cidades (nome, estado, website), onde
 cada cidade possui um ou mais restaurantes (nome, valor da refeição) e hotéis (nome, valor da diária).
 Além disso, deseja-se registrar pacotes turísticos vendidos. Para registrar um pacote turístico, deve-se
 escolher uma cidade, definir a data da viagem, o hotel de hospedagem e o número de dias de
-permanência. Deve-se também definir se no pacote vai estar incluso ou não um restaurante e, se sim,
+permanência. Deve-se também definir se no , vai estar incluso ou não um restaurante e, se sim,
 quantas refeições por dia serão consumidas.
 
 ## UML - Modelo conceitual
@@ -22,6 +22,7 @@ quantas refeições por dia serão consumidas.
 - java -jar xtur.jar
 
 # Tecnologias utilizadas
+
 ## Back end
 - Java 17
 - Spring Boot 2.7.1
