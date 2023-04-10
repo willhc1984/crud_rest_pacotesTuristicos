@@ -35,7 +35,7 @@
 			      <td th:text="${pacote.refeicoesPorDia}"></td>
 			      <td th:text="${@valorTotal.valorTotal(pacote.id)}"></td>
 			      <td>
-			      	<button type="button" class="btn btn-success btn-sm">Comprar  &nbsp; &nbsp;&nbsp;<i class="bi bi-cash-coin"></i></button>
+			      	<a th:href="@{/pagamento/{id} (id=${pacote.id})}" class="btn btn-success btn-sm">Comprar ;<i class="bi bi-cash-coin"></i></a>
 			      </td>
 			    </tr>
 			  </tbody>

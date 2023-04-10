@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.pacotesTuristicos.enums.RoleName;
+import com.example.pacotesTuristicos.model.Compra;
 import com.example.pacotesTuristicos.model.Pacote;
 import com.example.pacotesTuristicos.model.Role;
 import com.example.pacotesTuristicos.model.User;
@@ -47,8 +49,14 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping(value = "/pagamento")
-	public String pagamento() {
+	@GetMapping(value = "/pagamento/{id}")
+	public String pagamento(@PathVariable Integer id, ModelMap model,
+			@AuthenticationPrincipal org.springframework.security.core.userdetails.User loggedUser) {
+		Pacote pacote = pacoteService.buscarPorId(id);
+		Optional<User> user = userRepository.findByUsername(loggedUser.getUsername());
+		model.put("pacote", pacote);
+		model.put("user", user.get());
+		model.put("compra", new Compra());
 		return "pagamento";
 	}
 	
@@ -124,5 +132,11 @@ public class MainController {
 	public String acessoNegado() {
 		return "acessoNegado";
 	}
+	
+	@GetMapping(value = "/compraRealizada")
+	public String compraRealizada() {
+		return "compraRealizada";
+	}
+
 
 }

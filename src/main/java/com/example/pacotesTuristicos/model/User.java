@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -45,6 +46,9 @@ public class User implements UserDetails, Serializable {
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles = new ArrayList<Role>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Compra> compras = new ArrayList<>();
 	
 	public User() {
 		
@@ -93,6 +97,10 @@ public class User implements UserDetails, Serializable {
 
 	public List<Role> getRoles() {
 		return roles;
+	}
+
+	public List<Compra> getCompras() {
+		return compras;
 	}
 
 	@Override

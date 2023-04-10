@@ -1,93 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-  	<div th:replace="fragments/header :: header"></div>
-  	<link rel="stylesheet" href="/css/pagamento.css">
-  </head>
-  <body>
-    
-    <div style="padding-top: 80px;"></div>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Pagamento</title>
+    <div th:replace="fragments/header :: header"></div>
+    <link rel="stylesheet" href="/css/pagamento.css">
+  
+</head>
+<body>
+	
+	<div style="padding-top: 80px;"></div>
 	
 	<div th:replace="fragments/nav"></div>
 	
-	<div class="container">
-        <div class="mb-4">
-            <h2>Confirmar compra</h2>
+    <div class="container">
+        <h1 class="text-center mt-4 mb-4">Confirmar Pagamento</h1>
+        
+        <div class="row justify-content-center">
+	        <div class="card text-bg-warning mb-3 mb-4 text-center col-lg-6 col-md-8 col-sm-10" style="margin-bottom: 20px;">
+	            <div class="card-body">
+	                <h5 class="card-title">Valor da Compra</h5>
+	                <p class="card-text" th:text="${@valorTotal.valorTotal(pacote.id)}"></p>
+	            </div>
+	        </div>
+	        
+	        <div class="card border-warning mb-3 mb-4 col-lg-6 col-md-8 col-sm-10">
+	            <div class="card-body">
+	                <form th:action="@{/compras}" th:object="${compra}" method="POST">
+	                	<input type="hidden" th:field="${compra.id}" />
+	                	<input type="hidden" th:field="${compra.user}" />
+	                    <div class="row mb-3">
+	                        <label for="nomeImpresso" class="col-sm-6 col-form-label">Nome Impresso no Cartão:</label>
+	                        <div class="col-sm-6">
+	                            <input type="text" class="form-control" th:field="${compra.nomeImpresso}" id="nomeImpresso" required />
+	                        </div>
+	                    </div>
+	                    <div class="row mb-3">
+	                        <label for="numeroCartao" class="col-sm-6 col-form-label">Número do Cartão:</label>
+	                        <div class="col-sm-6">
+	                            <input type="text" class="form-control" th:field="${compra.numeroCartao}" id="numeroCartao" required />
+	                        </div>
+	                    </div>
+	                    <div class="row mb-3">
+	                        <label for="validade" class="col-sm-6 col-form-label">Validade:</label>
+	                        <div class="col-sm-6">
+	                            <input type="date" class="form-control" th:field="${compra.validade}" id="validade" required />
+	                        </div>
+	                    </div>
+	                    <div class="row mb-3">
+	                        <label for="cvv" class="col-sm-6 col-form-label">CVV:</label>
+	                        <div class="col-sm-6">
+	                            <input type="text" class="form-control" th:field="${compra.cvv}" id="cvv" required />
+	                        </div>
+	                    </div>
+	                    <div class="d-grid gap-2">
+	                        <button type="submit" class="btn btn-success btn-lg">Finalizar</button>
+	                    </div>
+	                </form>
+	            </div>
+	        </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-8">            
-                <div class="card p-3">
-                    <h6 class="text-uppercase">Detalhes do pagamento</h6>
-                    <div class="inputbox mt-3"> 
-                    	<input type="text" name="name" class="form-control" required="required"> <span>Nome impresso no cartão</span> 
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="inputbox mt-3 mr-2"> 
-                            	<input type="text" name="name" class="form-control" required="required"> <i class="fa fa-credit-card"></i> <span>Numero do cartão</span> 
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                             <div class="d-flex flex-row">
-                                 <div class="inputbox mt-3 mr-2"> 
-                                 	<input type="text" name="name" class="form-control" required="required"> <span>Validade</span> 
-                                 </div>
-                              <div class="inputbox mt-3 mr-2"> 
-                              	<input type="text" name="name" class="form-control" required="required"> <span>CVV</span> 
-                              </div>
-                             </div>                       
-                        </div>         
-                    </div>
-                    <div class="mt-4 mb-4">
-                        <h6 class="text-uppercase">Endereço de cobrança</h6>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="inputbox mt-3 mr-2"> 
-                                	<input type="text" name="name" class="form-control" required="required"> <span>Rua</span> 
-                                </div>
-                            </div>
-                             <div class="col-md-6">
-                                <div class="inputbox mt-3 mr-2"> 
-                                	<input type="text" name="name" class="form-control" required="required"> <span>Cidade</span> 
-                                </div>                  
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <div class="inputbox mt-3 mr-2"> 
-                                	<input type="text" name="name" class="form-control" required="required"> <span>Estado</span> 
-                                </div>
-                            </div>
-                             <div class="col-md-6">
-                                <div class="inputbox mt-3 mr-2"> 
-                                	<input type="text" name="name" class="form-control" required="required"> <span>CEP</span> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 mb-4 d-flex">
-                    	<button class="btn btn-success px-3">Finalizar compra</button>
-                	</div>
-                </div>
-                
-                
-                
-            </div>
-            
-	        <div class="col-md-4">
-		        <div class="card card-blue p-3 text-white mb-3">
-			        <span>Valor da compra</span>
-			        <div class="d-flex flex-row align-items-end mb-3">
-			        	<h1 class="mb-0 yellow">$549</h1> <span>.99</span>
-		            </div>
-	            </div>           
-            </div>           
-            
-        </div>
-     </div>
-	
-	<div th:replace="fragments/footer"></div>
-  
-  </body>
+    </div>
+    
+    <div th:replace="fragments/footer"></div>
+    
+</body>
 </html>

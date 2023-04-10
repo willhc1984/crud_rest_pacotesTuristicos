@@ -36,7 +36,7 @@ public class Security extends WebSecurityConfigurerAdapter{
 		.antMatchers("/", "/pacotes", "/promocoes", "/contato", "/sobrenos","/register",
 				"/api/**", "/**/*.*", "/h2-console/**").permitAll()
 		.antMatchers("/dashboard/**").hasRole("ADMIN")
-		
+		.antMatchers("/pagamento/*").authenticated()
 		.and()
 		.formLogin()
 			.loginPage("/login")

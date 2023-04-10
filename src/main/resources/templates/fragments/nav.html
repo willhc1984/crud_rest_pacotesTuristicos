@@ -58,7 +58,6 @@
 		                  	<span sec:authentication="principal.username"></span>
 		                  </a>
 		                  <ul class="dropdown-menu dropdown-menu-right mr-4">
-		                     <li><a class="dropdown-item" href="/pedidos">Meus pedidos</a></li>
 		                     <div sec:authorize="isAuthenticated()"> 
 		                     <li class="nav-item">
 			                  	<form action="/logout" method="POST">
